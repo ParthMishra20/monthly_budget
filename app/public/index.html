@@ -56,6 +56,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -68,18 +69,58 @@
             font-size: 16px;
             color: #333;
         }
+        .answer-box {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .answer-box input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        .answer-box button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #b8860b;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .answer-box button:hover {
+            background-color: #d4af37;
+        }
     </style>
 </head>
 <body>
     <div class="envelope" onclick="openLetter()">
         <div class="letter">
             <p>haan bhai sab theek😎</p>
+            <div class="answer-box" style="display: none;">
+                <input type="text" id="answer" placeholder="Type your answer">
+                <button onclick="submitAnswer()">Submit</button>
+            </div>
         </div>
     </div>
 
     <script>
         function openLetter() {
-            document.querySelector('.envelope').classList.toggle('open');
+            const envelope = document.querySelector('.envelope');
+            envelope.classList.toggle('open');
+            const answerBox = document.querySelector('.answer-box');
+            if (envelope.classList.contains('open')) {
+                answerBox.style.display = 'flex';
+            } else {
+                answerBox.style.display = 'none';
+            }
+        }
+
+        function submitAnswer() {
+            const answer = document.getElementById('answer').value;
+            alert('Your answer: ' + answer);
         }
     </script>
 </body>
